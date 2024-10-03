@@ -1,0 +1,509 @@
+<!DOCTYPE html><html><head>
+      <title>monocle</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\Administrator\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.8.14\crossnote\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="1monocle安装">1.monocle安装 </h1>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>BiocManager::install("monocle")
+library(monocle)
+</code></pre><h1 id="2加载数据">2.加载数据 </h1>
+<p>这里使用的数据是示例数据，<strong>来自SeuratData</strong>，数据已经经过了细胞分群</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>library(pbmc3k.SeuratData)
+data("pbmc3k") 
+sce=pbmc3k.final 
+</code></pre><pre data-role="codeBlock" data-info="" class="language-text"><code>#####提取要做monocle的细胞群子集
+sce1=subset(sce, seurat_annotations %in% c('CD14+ Mono','FCGR3A+ Mono')) 
+sce1 &lt;- NormalizeData(sce1) %&gt;%
+  FindVariableFeatures(selection.method = "vst", nfeatures = 2000)  
+</code></pre><h1 id="3转化为-monocle-cds数据格式">3.转化为 monocle CDS数据格式 </h1>
+<h2>3.1直接转换</h2>
+<p>一步转换，很轻松</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>### 2.1 Seurat转为cds数据
+HSMM &lt;- as.CellDataSet(sce1)
+HSMM
+</code></pre><p><img src="2024-10-02-15-37-56.png" alt=""></p>
+<h2>3.2自行构建cds</h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>## 3.2 如果是其他格式的数据，需要自行构建cds格式
+# 3.2.1 表型数据
+sample_ann &lt;- sce1@meta.data  
+# 3.2.2 基因信息
+gene_ann &lt;- data.frame(
+ gene_short_name = rownames(sce1@assays$RNA), 
+ row.names = rownames(sce1@assays$RNA) 
+)
+# 3.2.3 表达矩阵
+pd &lt;- new("AnnotatedDataFrame",
+         data=sample_ann)
+fd &lt;- new("AnnotatedDataFrame",
+         data=gene_ann)
+ct=as.data.frame(sce1@assays$RNA@counts)
+# 3.2.4 构建cds对象
+HSMM2 &lt;- newCellDataSet(
+ as.matrix(ct), 
+ phenoData = pd,
+ featureData =fd,
+ expressionFamily = negbinomial.size(),
+ lowerDetectionLimit=1)
+HSMM2
+</code></pre><h1 id="4运行monocle">4.运行monocle </h1>
+<h2 id="41计算size-factor">4.1计算size factor </h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>HSMM &lt;- estimateSizeFactors(HSMM)
+HSMM &lt;- estimateDispersions(HSMM)
+</code></pre><font color="red">
+<font size="2">
+Warning Messages:
+</font></font><ol><font color="red"><font size="2">
+<li>
+<p><code>group_by_()</code> was deprecated in <code>dplyr</code> 0.7.0.<br>
+<i>Please use <code>group_by()</code> instead.</i><br>
+<i>See vignette('programming') for more help</i></p>
+<p>The deprecated feature was likely used in the <code>monocle</code> package.<br>
+Please report the issue to the authors.</p>
+<p>This warning is displayed once every 8 hours. Call <code>lifecycle::last_lifecycle_warnings()</code> to see where this warning was generated.</p>
+</li>
+</font></font><li><font color="red"><font size="2">
+<p><code>select_()</code> was deprecated in <code>dplyr</code> 0.7.0.<br>
+<i>Please use <code>select()</code> instead.</i><br>
+<i>See vignette('programming') for more help</i></p>
+<p>The deprecated feature was likely used in the <code>monocle</code> package.<br>
+Please report the issue to the authors.</p>
+</font></font><p><font color="red"><font size="2">This warning is displayed once every 8 hours. Call <code>lifecycle::last_lifecycle_warnings()</code> to see where this warning was generated.<br>
+</font><br>
+</font><br>
+报错了，问题出在monocle包的代码</p>
+</li>
+</ol>
+<h2 id="修改monocle代码">修改monocle代码 </h2>
+<p>monocle代码有点问题，现在我直接修改monocle2.30.1的代码</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>trace(monocle:::estimateDispersionsForCellDataSet, edit = T)
+</code></pre><p>修改对应的代码即可，这种方法修改代码只能用一次</p>
+<h2 id="42数据质控">4.2数据质控 </h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>HSMM &lt;- detectGenes(HSMM, min_expr = 1)
+print(head(fData(HSMM)))
+</code></pre><table>
+<thead>
+<tr>
+<th>gene_short_name</th>
+<th>num_cells_expressed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AL627309.1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>AP006222.2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>RP11-206L10.2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>RP11-206L10.9</td>
+<td>0</td>
+</tr>
+<tr>
+<td>LINC00115</td>
+<td>0</td>
+</tr>
+<tr>
+<td>NOC2L</td>
+<td>7</td>
+</tr>
+</tbody>
+</table>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>#########
+expressed_genes &lt;- row.names(subset(fData(HSMM),
+                                    num_cells_expressed &gt;= 10))
+
+head(pData(HSMM))
+</code></pre><table>
+<thead>
+<tr>
+<th>orig.ident</th>
+<th>nCount_RNA</th>
+<th>nFeature_RNA</th>
+<th>seurat_annotations</th>
+<th><a href="http://percent.mt">percent.mt</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AAACCGTGCTTCCG</td>
+<td>2639</td>
+<td>960</td>
+<td>CD14+ Mono</td>
+<td>1.743085</td>
+</tr>
+<tr>
+<td>AAACGCTGTTTCTG</td>
+<td>1103</td>
+<td>550</td>
+<td>FCGR3A+ Mono</td>
+<td>2.901179</td>
+</tr>
+<tr>
+<td>AAAGAGACGCGAGA</td>
+<td>3033</td>
+<td>1058</td>
+<td>CD14+ Mono</td>
+<td>1.417738</td>
+</tr>
+<tr>
+<td>AAAGCAGATATCGG</td>
+<td>4584</td>
+<td>1422</td>
+<td>CD14+ Mono</td>
+<td>1.396161</td>
+</tr>
+<tr>
+<td>AAAGTTTGTAGCGT</td>
+<td>2683</td>
+<td>877</td>
+<td>CD14+ Mono</td>
+<td>2.497205</td>
+</tr>
+<tr>
+<td>AAATCAACCCTATT</td>
+<td>5676</td>
+<td>1541</td>
+<td>FCGR3A+ Mono</td>
+<td>2.431290</td>
+</tr>
+</tbody>
+</table>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>length(expressed_genes)
+</code></pre><p>1803</p>
+<h2 id="43选择输入的基因用于排序细胞">4.3选择输入的基因用于排序细胞 </h2>
+<p>第一步是决定用哪些基因来进行聚类（特征选择）。我们可以使用所有的基因，但是我们将包括很多没有表达到足够高水平来提供有意义的信号的基因，它们只会给系统增加噪音。因此，并不是所有的基因都有作用，所以先进行挑选合适的基因用来进行聚类。</p>
+<p>这里选择基因的方式有很多，说明文档中建议以下4种选择基因的方式<br>
+（1）选择离散程度高的基因（例如Seurat的高变基因）；<br>
+（2）选择clusters差异表达基因（算法预测）；<br>
+（3）选择发育差异表达基因（需要结合背景知识）；<br>
+（4）自定义发育marker基因（需要结合背景知识）。</p>
+<h3 id="431-根据高变基因最常用">4.3.1 根据高变基因(最常用) </h3>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>HSMM &lt;- setOrderingFilter(HSMM, VariableFeatures(sce1))
+plot_ordering_genes(HSMM)
+</code></pre><p><img src="2024-10-03-11-38-30.png" alt=""></p>
+<h3 id="432根据cluster">4.3.2根据cluster </h3>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>## 4.3.2 选择clusters差异表达基因
+diff_test_res &lt;- differentialGeneTest(HSMM[expressed_genes,],
+                                      fullModelFormulaStr = "~seurat_annotations",
+                                      cores = 10)
+</code></pre><pre data-role="codeBlock" data-info="" class="language-text"><code># 挑选差异最显著的基因进行可视化
+ordering_genes &lt;- subset(diff_test_res, qval &lt; 0.05)
+# 按 p 值对挑选出的基因进行排序
+ordering_genes = ordering_genes[order(ordering_genes$pval),]
+# 显示排序后的基因的前几行，包括基因名、p 值和 q 值
+head(ordering_genes[,c("gene_short_name", "pval", "qval")] )
+# 提取前几个基因的名称作为字符向量
+cg = as.character(head(ordering_genes$gene_short_name))
+cg
+</code></pre><p>"S100A9" "S100A8" "FCGR3A" "LYZ"    "IFITM2" "LGALS2"</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code># 从差异测试结果中挑选校正后的p值（qval）小于0.05的基因
+# 并将这些基因的行名（通常是基因名）保存在ordering_genes变量中
+ordering_genes &lt;- row.names(subset(diff_test_res, qval &lt; 0.05))
+
+# 计算挑选出的基因数量
+gene_count &lt;- length(ordering_genes)
+# 打印基因数量
+print(gene_count)
+
+# 使用setOrderingFilter函数将挑选出的基因设置为过滤条件
+# 这里只取了前3000个基因进行后续分析
+HSMM &lt;- setOrderingFilter(HSMM, ordering_genes[1:3000])
+
+# 绘制挑选出的基因的排序图
+plot_ordering_genes(HSMM)
+</code></pre><p><img src="2024-10-03-11-30-43.png" alt=""></p>
+<h3 id="43根据表达量进行注释">4.3根据表达量进行注释 </h3>
+<pre data-role="codeBlock" data-info="" class="language-text"><code># 使用 dispersionTable 函数计算 HSMM 对象中基因的离散度表
+disp_table &lt;- dispersionTable(HSMM)
+
+# 从离散度表中筛选出平均表达量大于等于 0.1 的基因
+unsup_clustering_genes &lt;- subset(disp_table, mean_expression &gt;= 0.1)
+
+# 使用 setOrderingFilter 函数设置 HSMM 对象的排序过滤条件
+# 这里使用筛选出的基因的 ID 列表作为过滤条件
+HSMM &lt;- setOrderingFilter(HSMM, unsup_clustering_genes$gene_id)
+plot_ordering_genes(HSMM)
+</code></pre><p><img src="2024-10-03-11-41-55.png" alt=""></p>
+<h2 id="44-降维--排序">4.4 降维 &amp; 排序 </h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code># 使用 reduceDimension 函数对 HSMM 对象进行降维分析
+# max_components 设置为 2，表示结果中只保留前两个主成分
+# num_dim 设置为 20，表示要计算的主成分数量
+# method 设置为 'DDRTree'，使用 DDRTree 方法进行降维
+HSMM &lt;- reduceDimension(HSMM,
+                        max_components = 2,
+                        num_dim = 20,
+                        # 如果数据中存在批次效应，可以取消注释下面的行来指定批次
+                        # residualModelFormulaStr = "~SampleID", # 如果存在批次则指定批次
+                        method = 'DDRTree') 
+
+# 使用 orderCells 函数对细胞进行排序，以便于后续的可视化
+HSMM &lt;- orderCells(HSMM)
+
+pData(HSMM) %&gt;% head()
+</code></pre><table>
+<thead>
+<tr>
+<th>orig.ident</th>
+<th>nCount_RNA</th>
+<th>nFeature_RNA</th>
+<th>seurat_annotations</th>
+<th><a href="http://percent.mt">percent.mt</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AAACCGTGCTTCCG</td>
+<td>2639</td>
+<td>960</td>
+<td>CD14+ Mono</td>
+<td>1.743085</td>
+</tr>
+<tr>
+<td>AAACGCTGTTTCTG</td>
+<td>1103</td>
+<td>550</td>
+<td>FCGR3A+ Mono</td>
+<td>2.901179</td>
+</tr>
+<tr>
+<td>AAAGAGACGCGAGA</td>
+<td>3033</td>
+<td>1058</td>
+<td>CD14+ Mono</td>
+<td>1.417738</td>
+</tr>
+<tr>
+<td>AAAGCAGATATCGG</td>
+<td>4584</td>
+<td>1422</td>
+<td>CD14+ Mono</td>
+<td>1.396161</td>
+</tr>
+<tr>
+<td>AAAGTTTGTAGCGT</td>
+<td>2683</td>
+<td>877</td>
+<td>CD14+ Mono</td>
+<td>2.497205</td>
+</tr>
+<tr>
+<td>AAATCAACCCTATT</td>
+<td>5676</td>
+<td>1541</td>
+<td>FCGR3A+ Mono</td>
+<td>2.431290</td>
+</tr>
+</tbody>
+</table>
+<pre data-role="codeBlock" data-info="" class="language-text"><code># 定义一个函数，用于根据细胞发展状态（cds）和起始点（starting_point）来确定细胞的排序
+GM_state &lt;- function(cds, starting_point, cluster){
+    # 如果细胞状态（cds$State）不唯一，即存在多个状态，那么执行if语句
+    if (length(unique(cds$State)) &gt; 1){
+        # 创建一个表格，统计每个状态在特定聚类（cluster）中的出现次数
+        T0_counts &lt;- table(cds$State, cds@phenoData@data[,cluster])[,starting_point]
+        # 找出出现次数最多的状态的名称
+        return(as.numeric(names(T0_counts)[which
+                                           (T0_counts == max(T0_counts))]))
+    } else {
+        # 如果所有细胞状态相同，即只有一个状态，返回状态1
+        return (1)
+    }
+}
+</code></pre><pre data-role="codeBlock" data-info="" class="language-text"><code>root_start = GM_state(cds = HSMM,starting_point = "CD14+ Mono",cluster = "celltype")
+HSMM &lt;- monocle::orderCells(HSMM, root_state = root_start)
+</code></pre><h1 id="5可视化">5.可视化 </h1>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>#配色
+colour=c("#DC143C","#0000FF","#20B2AA","#FFA500","#9370DB","#98FB98","#F08080","#1E90FF","#7CFC00","#FFFF00",
+         "#808000","#FF00FF","#FA8072","#7B68EE","#9400D3","#800080","#A0522D","#D2B48C","#D2691E","#87CEEB","#40E0D0","#5F9EA0",
+         "#FF1493","#0000CD","#008B8B","#FFE4B5","#8A2BE2","#228B22","#E9967A","#4682B4","#32CD32","#F0E68C","#FFFFE0","#EE82EE",
+         "#FF6347","#6A5ACD","#9932CC","#8B008B","#8B4513","#DEB887")
+
+#主题
+if(T){
+  text.size = 12
+  text.angle = 45
+  text.hjust = 1
+  legend.position = "right"
+  mytheme &lt;- theme(plot.title = element_text(size = text.size+2,color="black",hjust = 0.5),
+                   axis.ticks = element_line(color = "black"),
+                   axis.title = element_text(size = text.size,color ="black"), 
+                   axis.text = element_text(size=text.size,color = "black"),
+                   axis.text.x = element_text(angle = text.angle, hjust = text.hjust ), #,vjust = 0.5
+                   panel.grid=element_blank(), # 去网格线
+                   legend.position = legend.position,
+                   legend.text = element_text(size= text.size),
+                   legend.title= element_text(size= text.size)
+  )
+}
+</code></pre><h3 id="51-基于各种类型可视化">5.1 基于各种“类型”可视化 </h3>
+<pre data-role="codeBlock" data-info="" class="language-text"><code># 分别为根据 seurat cluster ，State ，Pseudotime 和 singleR注释后的cell type 着色。
+a1 &lt;- plot_cell_trajectory(HSMM, color_by = "seurat_annotations") + scale_color_manual(values = colour)
+a2 &lt;- plot_cell_trajectory(HSMM, color_by = "State") + scale_color_manual(values = colour)
+a3 &lt;- plot_cell_trajectory(HSMM, color_by = "Pseudotime") + ggsci::scale_color_gsea()
+options(repr.plot.width = 14, repr.plot.height = 4.5)
+wrap_plots(a1, a2, a3)
+</code></pre><p><img src="2024-10-03-16-36-41.png" alt=""></p>
+<h2 id="52-分面展示">5.2 分面展示 </h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>options(repr.plot.width = 4, repr.plot.height = 6)
+plot_cell_trajectory(HSMM, color_by = "Pseudotime") +
+    facet_wrap(~celltype, nrow = 2) + ggsci::scale_color_gsea()
+</code></pre><p><img src="2024-10-03-16-47-58.png" alt=""></p>
+<h3 id="53-添加树形图">5.3 添加“树形图” </h3>
+<pre data-role="codeBlock" data-info="" class="language-text"><code># plot_complex_cell_trajectory函数添加“树形图”
+p1 &lt;- plot_cell_trajectory(HSMM, x = 1, y = 2, color_by = "celltype") + 
+  theme(legend.position='none',panel.border = element_blank()) + 
+  scale_color_manual(values = colour) 
+p2 &lt;- plot_complex_cell_trajectory(HSMM, x = 1, y = 2,
+                                   color_by = "celltype")+
+  scale_color_manual(values = colour) +
+  theme(legend.title = element_blank()) 
+
+options(repr.plot.width = 4.5, repr.plot.height = 9)
+wrap_plots(p1, p2, ncol = 1, heights = c(2,1.5))
+</code></pre><p><img src="2024-10-03-16-49-14.png" alt=""></p>
+<h3 id="54-箱式图">5.4 箱式图 </h3>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>input.data = data.frame(celltype = HSMM$celltype,
+                        Pseudotime = HSMM$Pseudotime)
+
+options(repr.plot.width = 4.5, repr.plot.height = 4)
+ggboxplot(data = input.data,
+          fill = "celltype", 
+          x = "celltype",  
+          y = "Pseudotime")+mytheme
+</code></pre><p><img src="2024-10-03-16-53-06.png" alt=""></p>
+<h3 id="55-gene表达">5.5 gene表达 </h3>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>input.gene &lt;- c("CD14","S100A8", "FCGR3A")
+cds_subset &lt;- HSMM[input.gene,]
+
+options(repr.plot.width = 12, repr.plot.height = 3)
+plot_genes_in_pseudotime(cds_subset, color_by = "celltype", ncol = 3)
+</code></pre><p><img src="2024-10-03-16-59-28.png" alt=""></p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code># 提取名为 FCGR3A 的基因表达数据，并将其添加到 HSMM 对象的元数据中
+pData(HSMM)$FCGR3A &lt;- as.numeric(GetAssayData(object = sce1, assay = "RNA", slot = "data")["FCGR3A",])
+
+# 提取名为 CD14 的基因表达数据，并将其添加到 HSMM 对象的元数据中
+pData(HSMM)$CD14 &lt;- as.numeric(GetAssayData(object = sce1, assay = "RNA", slot = "data")["CD14",])
+
+# 使用 monocle 包的 plot_cell_trajectory 函数绘制细胞发展轨迹
+# 并使用 ggsci 包的 scale_color_gsea 函数为轨迹图添加颜色
+p1 &lt;- plot_cell_trajectory(HSMM, color_by = "FCGR3A") + ggsci::scale_color_gsea()
+
+# 同样绘制细胞发展轨迹，但这次根据 CD14 基因表达数据进行颜色编码
+p2 &lt;- plot_cell_trajectory(HSMM, color_by = "CD14") + ggsci::scale_color_gsea()
+
+options(repr.plot.width = 12, repr.plot.height = 4.5)
+wrap_plots(p1, p2, ncol = 2)
+</code></pre><p><img src="2024-10-03-17-23-28.png" alt=""></p>
+<h3 id="56-gene通路的相关性折线图">5.6 gene/通路的相关性折线图 </h3>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>input.data = data.frame(celltype = HSMM$celltype,
+                        Pseudotime = HSMM$Pseudotime)
+## 基因
+input.data$FCGR3A = as.numeric(GetAssayData(object = sce, assay = "RNA",slot = "data")["FCGR3A",])
+options(repr.plot.width = 6, repr.plot.height = 4)
+## Vis
+ggplot(input.data, aes(x = Pseudotime, y = FCGR3A)) +
+  labs(x="Pseudotime",y = "Expression level (log2)")+
+  ggpubr::stat_cor(label.sep = "\n",
+                   label.y = 3,
+                   label.y.npc = "top",
+                   size = 4,
+                   method = "sp")  +
+  geom_smooth(method='loess',size=0.8, color = "black") + theme_bw() +
+  ggfun::facet_set(label = "FCGR3A")+
+  mytheme + theme(legend.position = "none")
+</code></pre><p><img src="2024-10-03-17-39-33.png" alt=""></p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>## 通路
+sce = AddModuleScore(object = sce, features = 
+                       list(test = c("LGALS2", "FCGR3A", "S100A9", "CCL3", "CD14", "LYZ", "FOLR3", "ECHDC1", "S100A8")),
+                     name = "test_pathway")
+input.data$test_pathway = sce$test_pathway1
+ggplot(input.data, aes(x = Pseudotime, y = test_pathway)) +
+  labs(x="Pseudotime",y = "Pathway activity")+
+  ggpubr::stat_cor(label.sep = "\n",
+                   label.y = 0,
+                   label.y.npc = "top",
+                   size = 4,
+                   method = "sp")  +
+  geom_smooth(method='loess',size=0.8, color = "black") + theme_bw() +
+  ggfun::facet_set(label = "Test pathway")+
+  mytheme + theme(legend.position = "none")
+</code></pre><p><img src="2024-10-03-17-40-55.png" alt=""></p>
+<h1 id="6-感兴趣基因的热图">6. 感兴趣基因的热图 </h1>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>input.gene &lt;- c("LGALS2", "FCGR3A", "S100A9", "CCL3", "CD14", "LYZ", "FOLR3", "ECHDC1", "S100A8")
+options(repr.plot.width = 6, repr.plot.height = 4)
+plot_pseudotime_heatmap(HSMM[input.gene,], 
+                             num_cluster = 4, 
+                             show_rownames = T, 
+                             return_heatmap = T)
+</code></pre><p><img src="2024-10-03-17-47-09.png" alt=""></p>
+<h1 id="6beam分析">6.BEAM分析 </h1>
+<p>确定了分化起点后，Monocle可以模拟出每个细胞所处的分化时间，并寻找随着分化时间逐渐升高或降低的基因，即Beam分析。</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code># 使用 BEAM 函数对 HSMM 对象进行分支轨迹分析
+BEAM_res &lt;- BEAM(HSMM, branch_point = 1, 
+                 cores = 4, 
+                 progenitor_method = "duplicate")
+# 按照 qval 对 BEAM 分析结果进行排序
+BEAM_res &lt;- BEAM_res[order(BEAM_res$qval),]
+# 选择包含基因名称、p 值和 q 值的列
+BEAM_res &lt;- BEAM_res[,c("gene_short_name", "pval", "qval")]
+# 查看 BEAM 分析结果的维度，即结果的行数和列数
+dim(BEAM_res)
+# 将 BEAM 分析结果保存为 CSV 文件
+write.csv(BEAM_res, file = "./Outdata/Step1.BEAM_res.csv")
+# 从 BEAM 分析结果中提取 q 值小于 0.05 的基因
+input.gene = row.names(subset(BEAM_res, qval &lt; 0.05))
+# 打印提取的基因列表
+input.gene
+# 计算并打印提取的基因数量
+length(input.gene)
+# 设置图形输出选项，定义图形的宽度和高度
+options(repr.plot.width = 4.5, repr.plot.height = 6)
+# 使用 plot_genes_branched_heatmap 函数绘制分支热图
+# 函数参数指定了分支点、聚类数、使用的核心数以及是否显示基因名称和行名
+plot_genes_branched_heatmap(HSMM[input.gene,],
+                            branch_point = 1,
+                            num_clusters = 6,
+                            cores = 2,
+                            use_gene_short_name = T,
+                            show_rownames = T)
+</code></pre><p><img src="%7BAFDA0733-9DE8-410F-A588-DFA859355EF9%7D.png" alt="alt text"><br>
+上图将Top差异基因聚成6类，展示了pre-branch向cell fate1和cell fate2状态分化相关的命运决定基因。</p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
