@@ -1,0 +1,75 @@
+##############################定义一个函数，减少代码
+process_single_cell <- function(sce, scale.factor = 10000, nfeatures = 2000, pcs_threshold = 90, variation_diff = 0.1) {
+  # Normalize the data
+  sce <- NormalizeData(sce, normalization.method = "LogNormalize", scale.factor = scale.factor)
+  # Find variable features
+  sce <- FindVariableFeatures(sce, selection.method = "vst", nfeatures = nfeatures)
+  # Scale the data
+  sce <- ScaleData(sce, features = rownames(sce))
+  library(harmony)
+  sce=RunHarmony(sce,"orig.ident",project.dim = F)
+  # Calculate percent of variance explained by each principal component
+  pct <- sce[["harmony"]]@stdev / sum(sce[["harmony"]]@stdev) * 100 
+  # Calculate cumulative percentages
+  cumu <- cumsum(pct)
+  # Find the first PC where the cumulative percentage exceeds 90% and individual % variance is < 5%
+  co1 <- which(cumu > pcs_threshold & pct < 5)[1]
+  # Find the PC where the difference between consecutive PCs is more than 0.1%
+  co2 <- sort(which((pct[1:length(pct) - 1] - pct[2:length(pct)]) > variation_diff), decreasing = TRUE)[1] + 1
+  # Select the minimum of the two as the number of PCs to use
+  pcs <- min(co1, co2)
+  # Run UMAP
+  sce <- RunUMAP(sce, reduction = 'harmony', dims = 1:pcs)
+  sce <- FindNeighbors(sce,reduction = 'harmony',dims = 1:pcs)
+  # Plot UMAP with different clustering resolutions
+  for (res in c(0.05,0.1,0.3,0.5,0.8,1)){
+    print(res)
+    sce <- FindClusters(sce, resolution = res, algorithm = 1)%>% 
+      identity()
+  }
+  # Return the processed Seurat object
+  return(sce)
+}
+process_single_cell_noharomny <- function(sce, scale.factor = 10000, nfeatures = 2000, pcs_threshold = 90, variation_diff = 0.1) {
+  # Normalize the data
+  sce <- NormalizeData(sce, normalization.method = "LogNormalize", scale.factor = scale.factor)
+  # Find variable features
+  sce <- FindVariableFeatures(sce, selection.method = "vst", nfeatures = nfeatures)
+  # Scale the data
+  sce <- ScaleData(sce, features = rownames(sce))
+  # Run PCA
+  sce <- RunPCA(sce, features = VariableFeatures(object = sce)) 
+  # Calculate percent of variance explained by each principal component
+  pct <- sce[["pca"]]@stdev / sum(sce[["pca"]]@stdev) * 100 
+  # Calculate cumulative percentages
+  cumu <- cumsum(pct)
+  # Find the first PC where the cumulative percentage exceeds 90% and individual % variance is < 5%
+  co1 <- which(cumu > pcs_threshold & pct < 5)[1]
+  # Find the PC where the difference between consecutive PCs is more than 0.1%
+  co2 <- sort(which((pct[1:length(pct) - 1] - pct[2:length(pct)]) > variation_diff), decreasing = TRUE)[1] + 1
+  # Select the minimum of the two as the number of PCs to use
+  pcs <- min(co1, co2)
+  # Run UMAP
+  sce <- RunUMAP(sce, reduction = 'pca', dims = 1:pcs)
+  sce <- FindNeighbors(sce,reduction = 'pca',dims = 1:pcs)
+  # Plot UMAP with different clustering resolutions
+  for (res in c(0.05,0.1,0.3,0.5,0.8,1)){
+    print(res)
+    sce <- FindClusters(sce, resolution = res, algorithm = 1)%>% 
+      identity()
+  }
+  # Return the processed Seurat object
+  return(sce)
+}
+plot_umap_clusters_fixed <- function(seurat_object, ncol = 5) {
+  # 固定的分辨率列表
+  resolution_list <- c(0.05, 0.1, 0.3, 0.5, 0.8, 1)
+  # 使用 lapply 动态生成 DimPlot 列表
+  plot_list <- lapply(resolution_list, function(resolution) {
+    DimPlot(seurat_object, reduction = "umap", group.by = paste0("RNA_snn_res.", resolution), label = TRUE) & NoAxes()
+  })
+  # 将所有的图形拼接到一个 UMAP 图中
+  cluster_umap <- wrap_plots(ncol = ncol, plot_list)
+  # 返回拼接的 UMAP 图
+  return(cluster_umap)
+}
