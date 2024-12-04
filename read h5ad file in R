@@ -1,0 +1,10 @@
+BiocManager::install("anndata")
+use_condaenv(condaenv = "/home/data/t180543/miniconda3/envs/spatialtranscriptome", required = TRUE)
+ad <- import("anndata")
+final_ad <- ad$read_h5ad("/home/data/t180543/allfolder/CRC integraty data1/LEC.h5ad")
+
+# 创建 Seurat 对象
+seurat_obj <- Seurat::CreateSeuratObject(
+  counts = t(final_ad$X), ##一定要转置矩阵！obs*vars在Suerat中是反过来的
+  assay = "RNA",
+  meta.data = final_ad$obs)
