@@ -19,46 +19,54 @@ process_single_cell <- function(sce, scale.factor = 10000, nfeatures = 2000, pcs
   # Select the minimum of the two as the number of PCs to use
   pcs <- min(co1, co2)
   # Run UMAP
-  sce <- RunUMAP(sce, reduction = 'harmony', dims = 1:pcs)
-  sce <- FindNeighbors(sce,reduction = 'harmony',dims = 1:pcs)
-  # Plot UMAP with different clustering resolutions
-  for (res in c(0.05,0.1,0.3,0.5,0.8,1)){
-    print(res)
-    sce <- FindClusters(sce, resolution = res, algorithm = 1)%>% 
-      identity()
+  sce <- RunUMAP(sce, reduction = 'pca', dims = 1:pcs)
+  sce <- FindNeighbors(sce, reduction = 'pca', dims = 1:pcs)
+  
+  # Ensure clustering results do not overwrite the object
+  for (res in c(0.05, 0.1, 0.3, 0.5, 0.8, 1)) {
+    sce <- FindClusters(sce, resolution = res, algorithm = 1)
+    print(paste("Resolution:", res))
+    print(table(Idents(sce))) # Print clustering summary for each resolution
   }
-  # Return the processed Seurat object
+  
+  # Step 8: Return the processed Seurat object
   return(sce)
 }
+
 process_single_cell_noharomny <- function(sce, scale.factor = 10000, nfeatures = 2000, pcs_threshold = 90, variation_diff = 0.1) {
-  # Normalize the data
+  # Step 1: Normalize the data
   sce <- NormalizeData(sce, normalization.method = "LogNormalize", scale.factor = scale.factor)
-  # Find variable features
+  
+  # Step 2: Find variable features
   sce <- FindVariableFeatures(sce, selection.method = "vst", nfeatures = nfeatures)
-  # Scale the data
+  
+  # Step 3: Scale the data
   sce <- ScaleData(sce, features = rownames(sce))
-  # Run PCA
+  
+  # Step 4: Run PCA
   sce <- RunPCA(sce, features = VariableFeatures(object = sce)) 
-  # Calculate percent of variance explained by each principal component
-  pct <- sce[["pca"]]@stdev / sum(sce[["pca"]]@stdev) * 100 
-  # Calculate cumulative percentages
+  
+  # Step 5: Calculate the percent variance explained by each principal component
+  pct <- sce[["pca"]]@stdev / sum(sce[["pca"]]@stdev) * 100
   cumu <- cumsum(pct)
-  # Find the first PC where the cumulative percentage exceeds 90% and individual % variance is < 5%
+  
+  # Step 6: Determine the optimal number of PCs
   co1 <- which(cumu > pcs_threshold & pct < 5)[1]
-  # Find the PC where the difference between consecutive PCs is more than 0.1%
-  co2 <- sort(which((pct[1:length(pct) - 1] - pct[2:length(pct)]) > variation_diff), decreasing = TRUE)[1] + 1
-  # Select the minimum of the two as the number of PCs to use
-  pcs <- min(co1, co2)
-  # Run UMAP
+  co2 <- sort(which((pct[1:(length(pct) - 1)] - pct[2:length(pct)]) > variation_diff), decreasing = TRUE)[1] + 1
+  pcs <- min(co1, co2, na.rm = TRUE) # Add `na.rm = TRUE` to handle potential `NA`
+  
+  # Step 7: Run UMAP and clustering
   sce <- RunUMAP(sce, reduction = 'pca', dims = 1:pcs)
-  sce <- FindNeighbors(sce,reduction = 'pca',dims = 1:pcs)
-  # Plot UMAP with different clustering resolutions
-  for (res in c(0.05,0.1,0.3,0.5,0.8,1)){
-    print(res)
-    sce <- FindClusters(sce, resolution = res, algorithm = 1)%>% 
-      identity()
+  sce <- FindNeighbors(sce, reduction = 'pca', dims = 1:pcs)
+  
+  # Ensure clustering results do not overwrite the object
+  for (res in c(0.05, 0.1, 0.3, 0.5, 0.8, 1)) {
+    sce <- FindClusters(sce, resolution = res, algorithm = 1)
+    print(paste("Resolution:", res))
+    print(table(Idents(sce))) # Print clustering summary for each resolution
   }
-  # Return the processed Seurat object
+  
+  # Step 8: Return the processed Seurat object
   return(sce)
 }
 plot_umap_clusters_fixed <- function(seurat_object, ncol = 5) {
