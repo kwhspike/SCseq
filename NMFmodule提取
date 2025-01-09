@@ -1,0 +1,43 @@
+##########提取module
+NMFToModules = function(
+    res,
+    gmin = 5
+){
+  
+  scores = basis(res)
+  coefs = coefficients(res)
+  
+  # Remove if fewer than gmin genes
+  ranks_x = t(apply(-t(t(scores) / apply(scores, 2, mean)), 1, rank))
+  ranks_y = apply(-t(t(scores) / apply(scores, 2, mean)), 2, rank)
+  for (i in 1:ncol(scores)){
+    ranks_y[ranks_x[,i] > 1,i] = Inf
+  }
+  modules = apply(ranks_y, 2, function(m){
+    a = sort(m[is.finite(m)])
+    a = a[a == 1:length(a)]
+    names(a)
+  })
+  l = sapply(modules, length)
+  keep = (l >= gmin)
+  scores = scores[, keep]
+  coefs = coefs[keep, ]
+  
+  # Find modules
+  ranks_x = t(apply(-t(t(scores) / apply(scores, 2, mean)), 1, rank))
+  ranks_y = apply(-t(t(scores) / apply(scores, 2, mean)), 2, rank)
+  for (i in 1:ncol(scores)){
+    ranks_y[ranks_x[,i] > 1,i] = Inf
+  }
+  modules = apply(ranks_y, 2, function(m){
+    a = sort(m[is.finite(m)])
+    a = a[a == 1:length(a)]
+    names(a)
+  })
+  
+  names(modules) = sapply(modules, '[', 1)
+  names(modules) = paste('m', names(modules), sep = '_')
+  names(modules) = gsub('-','_',names(modules))
+  
+  return(modules)
+}
