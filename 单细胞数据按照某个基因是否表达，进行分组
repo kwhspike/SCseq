@@ -1,0 +1,19 @@
+# 检查 FOXM1 是否存在
+if ("FOXM1" %in% rownames(sce.need.FOXM1)) {
+  # 提取 FOXM1 的表达矩阵（默认使用 "RNA" assay 的 counts 数据）
+  foxm1_expression <- GetAssayData(sce.need.FOXM1, slot = "counts")["FOXM1", ]
+  
+  # 创建分组标签（表达 > 0 为 Positive，否则为 Negative）
+  sce.need.FOXM1$FOXM1_group <- ifelse(foxm1_expression > 0, "FOXM1_positive", "FOXM1_negative")
+  
+  # 将分组信息转换为因子
+  sce.need.FOXM1$FOXM1_group <- factor(sce.need.FOXM1$FOXM1_group)
+  
+  # 可选：设置当前细胞分组为 FOXM1_group
+  # Idents(sce.need.FOXM1) <- sce.need.FOXM1$FOXM1_group
+  
+  # 查看分组统计
+  table(sce.need.FOXM1$FOXM1_group)
+} else {
+  warning("FOXM1 gene not found. Check gene name or data.")
+}
