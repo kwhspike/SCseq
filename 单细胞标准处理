@@ -1,0 +1,50 @@
+process_single_cell_noharmonny <- function(
+    sce, 
+    scale.factor = 10000, 
+    nfeatures = 2000, 
+    pcs_threshold = 90, 
+    variation_diff = 0.1
+) {
+  message("Initial class: ", class(sce))
+  
+  # Step 1: Normalize
+  sce <- NormalizeData(sce, normalization.method = "LogNormalize", scale.factor = scale.factor)
+  
+  # Step 2: Variable features
+  sce <- FindVariableFeatures(sce, selection.method = "vst", nfeatures = nfeatures)
+  
+  # Step 3: ScaleData —— ONLY VARIABLE GENES
+  sce <- ScaleData(sce, features = VariableFeatures(sce))
+  
+  # Step 4: PCA
+  sce <- RunPCA(sce, features = VariableFeatures(sce))
+  
+  # Step 5: select PCs
+  pct <- sce[["pca"]]@stdev / sum(sce[["pca"]]@stdev) * 100
+  cumu <- cumsum(pct)
+  
+  co1 <- which(cumu > pcs_threshold & pct < 5)[1]
+  co2 <- sort(which((pct[1:(length(pct) - 1)] - pct[2:length(pct)]) > variation_diff),
+              decreasing = TRUE)[1] + 1
+  pcs <- min(co1, co2, na.rm = TRUE)
+  
+  if (is.na(pcs) || pcs < 20) {
+    pcs <- 30  # 保底：最稳的选择
+  }
+  message("Selected PCs = ", pcs)
+  
+  # Step 6: Neighbors FIRST
+  sce <- FindNeighbors(sce, dims = 1:pcs)
+  
+  # Step 7: Then UMAP
+  sce <- RunUMAP(sce, dims = 1:pcs)
+  
+  # Step 8: Clustering at multiple resolutions
+  for (res in c(0.05, 0.1,0.2, 0.3, 0.5, 0.8, 1, 1.2)) {
+    sce <- FindClusters(sce, resolution = res, algorithm = 1)
+    message("Resolution: ", res)
+    print(table(Idents(sce)))
+  }
+  
+  return(sce)
+}
