@@ -1,0 +1,58 @@
+run_cellchat <- function(
+  seu_obj,
+  group.by = "cell_type",
+  species = c("human", "mouse"),
+  min.cells = 5,
+  raw.use = TRUE,
+  population.size = TRUE,
+  save.path = NULL
+) {
+  species <- match.arg(species)
+  
+  library(CellChat)
+  
+  # 1. 创建 CellChat 对象
+  cellchat <- createCellChat(
+    object = seu_obj,
+    group.by = group.by
+  )
+  
+  # 2. 指定数据库 & PPI
+  if (species == "human") {
+    cellchat@DB <- CellChatDB.human
+    PPI.use <- PPI.human
+  } else {
+    cellchat@DB <- CellChatDB.mouse
+    PPI.use <- PPI.mouse
+  }
+  
+  # 3. 数据预处理
+  cellchat <- subsetData(cellchat)
+  cellchat <- identifyOverExpressedGenes(cellchat)
+  cellchat <- identifyOverExpressedInteractions(cellchat)
+  cellchat <- projectData(cellchat, PPI.use)
+  
+  # 4. 计算通讯概率
+  cellchat <- computeCommunProb(
+    cellchat,
+    raw.use = raw.use,
+    population.size = population.size
+  )
+  
+  # 5. 过滤低细胞数通讯
+  cellchat <- filterCommunication(
+    cellchat,
+    min.cells = min.cells
+  )
+  
+  # 6. pathway & network 汇总
+  cellchat <- computeCommunProbPathway(cellchat)
+  cellchat <- aggregateNet(cellchat)
+  
+  # 7. 保存结果（可选）
+  if (!is.null(save.path)) {
+    qs::qsave(cellchat, save.path)
+  }
+  
+  return(cellchat)
+}
