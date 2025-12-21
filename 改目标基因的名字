@@ -1,0 +1,8 @@
+# 找到需要修改的基因位置
+gene_to_rename <- "C10orf10"
+new_name <- "DEPP1"
+
+# 修改 rownames
+rownames(seurat_obj) <- ifelse(rownames(seurat_obj) == gene_to_rename,
+                               new_name,
+                               rownames(seurat_obj))
