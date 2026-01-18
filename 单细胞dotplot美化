@@ -1,0 +1,4 @@
+DotPlot(myeloid_cell,features = "FDCSP",
+                  cols = c("lightgrey", "#E64B35FF"),  # 颜色梯度：灰→红
+                  dot.scale = 6,                       # 点大小缩放因子
+                  scale = TRUE)
