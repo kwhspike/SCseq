@@ -1,0 +1,40 @@
+old_genes <- rownames(merged_obj)
+
+gene_names <- gene_map$gene_name[
+  match(old_genes, gene_map$gene_id)
+]
+
+# 没匹配到的，保留原 ENSG
+gene_names[is.na(gene_names)] <- old_genes[is.na(gene_names)]
+
+# 🔴 关键：让 gene name 唯一（GENE, GENE.1, GENE.2）
+gene_names <- make.unique(gene_names)
+
+# 🔴 双重保险（可选，但推荐）
+stopifnot(
+  length(gene_names) == length(old_genes),
+  !any(duplicated(gene_names))
+)
+
+newnames <- gene_names
+names(newnames) <- old_genes
+
+merged_obj <- RenameFeatures(
+  merged_obj,
+  newnames = newnames
+)
+
+sum(grepl("^ENSG", rownames(merged_obj)))
+
+RenameGenesSeurat_v5 <- function(obj, newnames) {
+  RNA <- obj[["RNA"]]
+  
+  if (nrow(RNA) != length(newnames)) {
+    stop("Unequal gene sets: nrow(RNA) != length(newnames)")
+  }
+  
+  rownames(RNA) <- newnames
+  obj[["RNA"]] <- RNA
+  return(obj)
+}
+merged_obj1 <- RenameGenesSeurat_v5(merged_obj, gene_names)
